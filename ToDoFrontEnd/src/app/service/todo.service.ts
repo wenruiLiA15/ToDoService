@@ -10,6 +10,7 @@ export class TodoService {
 
   private _selectedTodoItem: ToDoItem = {} as ToDoItem;
   private _updatingTodoItem: ToDoItem = {} as ToDoItem;
+  public errorMessage: any;
   constructor(private todoStore: TodoStoreService,private todoApi: TodoApiService) {
   }
   
