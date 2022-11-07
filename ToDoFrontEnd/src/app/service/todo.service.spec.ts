@@ -11,7 +11,7 @@ describe('TodoService', () => {
   let todoStoreService: TodoStoreService;
   let httpClientSpy: any;
   beforeEach(() => {
-    httpClientSpy = jasmine.createSpyObj('HttpClient', ['post']);
+    httpClientSpy = jasmine.createSpyObj('HttpClient', ['post','put']);
     todoStoreService = new TodoStoreService();
     TestBed.configureTestingModule({
       providers: [
@@ -26,7 +26,7 @@ describe('TodoService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should create todoItem when using mocked httpPost request', () => {
+  it('should create todoItem when using mock httpPost request', () => {
     // given
     const todoItem = new ToDoItem(0, '', '', false);
     httpClientSpy.post.and.returnValue(of({}))
@@ -34,7 +34,7 @@ describe('TodoService', () => {
     service.create(todoItem);
     // then
     expect(httpClientSpy.post).toHaveBeenCalledWith(
-      'https://635fc244ca0fe3c21aa3d012.mockapi.io/api/todos',todoItem
+      'https://localhost:44309/ToDos',todoItem
     )
   });
 
@@ -49,5 +49,16 @@ describe('TodoService', () => {
     // then
     expect(service.errorMessage).toEqual('create failed')
 
+  });
+  it('should call update api when call update', () => {
+    // given
+    const todoItem = new ToDoItem(0, '', '', true)
+    httpClientSpy.put.and.returnValue(of({}))
+    // when
+    service.update(todoItem)
+    // then
+    expect(httpClientSpy.put).toHaveBeenCalledWith(
+      'https://localhost:44309/ToDos',todoItem
+    )
   });
 });
