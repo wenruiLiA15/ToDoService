@@ -17,5 +17,8 @@ export class TodoApiService {
   update(updateTodoItem: ToDoItem): Observable<void> {
     return this.http.put<void>(`${this.BASEURL}`, updateTodoItem)
   }
+  getById(id: number): Observable<ToDoItem> {
+    return this.http.get<ToDoItem>(`${this.BASEURL}/${id}`)
+  }
   
 }

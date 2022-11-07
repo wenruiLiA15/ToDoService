@@ -54,6 +54,9 @@ export class TodoService {
   }
 
   public findById(id: number): ToDoItem { 
-    return this.todoStore.findById(id)
+    this.todoApi.getById(id).subscribe({
+      next: Response => {this._selectedTodoItem = Response}
+    })
+    return this._selectedTodoItem
   }
 }
