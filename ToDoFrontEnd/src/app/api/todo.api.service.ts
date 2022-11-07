@@ -20,5 +20,7 @@ export class TodoApiService {
   getById(id: number): Observable<ToDoItem> {
     return this.http.get<ToDoItem>(`${this.BASEURL}/${id}`)
   }
-  
+  delete(id: number): Observable<ToDoItem> {
+    return this.http.delete<ToDoItem>(`${this.BASEURL}/${id}`)
+  }
 }
